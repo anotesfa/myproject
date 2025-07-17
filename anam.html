@@ -1,72 +1,880 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Form</title>
-  <style>
-    body {  
-      font-family: Arial, sans-serif;
-      background-color: #f6f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height:165vh;
-    }
-    .form-container {
-      background-color: white;
-      padding: 45px; 
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 310px; 
-    } 
-    .form-container h2 {
-      text-align: center;
-      margin-bottom: 27 px;
-    }
-    input[type="text"],
-    input[type="email"], 
-    input[type="password"] {
-      width:100%;
-      padding: 10px;  
-      margin: 7px 0; 
-      border: 1px solid #cccd;
-      border-radius: 5px;
-    }
-
-    button {
-      width: 110%;
-      background-color: #009BFF;
-      color: white;
-      padding: 6px;
-      border: none;
-      border-radius: 7px;
-      margin-top:10px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #9056c3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EthioFarmers Hub - Empowering Ethiopian farmers with market prices, weather forecasts, and farming tips">
+    <meta name="keywords" content="Ethiopia, farmers, agriculture, crops, market prices, weather forecast, farming tips">
+    <title>EthioFarmers Hub - Grow Smarter</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-green: #28a745;
+            --secondary-yellow: #ffc107;
+            --dark-green: #218838;
+            --light-gray: #f8f9fa;
+            --dark-gray: #343a40;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .feature-card {
+            border-radius: 10px;
+            transition: transform 0.3s;
+            height: 100%;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .price-table th {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        .weather-card {
+            border-left: 5px solid var(--secondary-yellow);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+            padding: 10px 25px;
+            font-weight: 500;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary-green);
+            color: white;
+        }
+        
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .social-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            color: white;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--secondary-yellow);
+        }
+        
+        .language-selector {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-leaf me-2"></i>EthioFarmers Hub
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prices">Market Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#weather">Weather</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tips">Farming Tips</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-language"></i> English
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Amharic</a></li>
+                            <li><a class="dropdown-item" href="#">Oromiffa</a></li>
+                            <li><a class="dropdown-item" href="#">Tigrinya</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="#register" class="btn btn-warning ms-lg-3">Join Free</a>
+            </div>
+        </div>
+    </nav>
 
-  <div class="form-container">
-    <h2>Register</h2>
-    <form>
-      <label for="name">Name </label>
-      <input type="text" id="name" name="name" required>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title mb-4">Empowering Ethiopian Farmers</h1>
+            <p class="lead mb-5">Get real-time market prices, accurate weather forecasts, and expert farming advice - all in one place.</p>
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                <a href="#register" class="btn btn-primary btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Join Our Community
+                </a>
+                <a href="#features" class="btn btn-outline-light btn-lg">
+                    <i class="fas fa-play-circle me-2"></i>Watch Demo
+                </a>
+            </div>
+        </div>
+    </section>
 
-      <label for="email">Your mail</label>
-      <input type="email" id="email" name="email" required>
+    <!-- Features Section -->
+    <section class="py-5 bg-light" id="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">How We Help Farmers</h2>
+                <p class="lead text-muted">Essential tools for modern farming success</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3 text-success">
+                                <i class="fas fa-chart-line fa-3x"></i>
+                            </div>
+                            <h4 class="card-title">Market Prices</h4>
+                            <p class="card-text">Real-time crop prices from major markets across Ethiopia. Updated hourly to help you get the best deals.</p>
+                            <a href="#prices" class="btn btn-outline-success">View Prices</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3 text-warning">
+                                <i class="fas fa-cloud-sun fa-3x"></i>
+                            </div>
+                            <h4 class="card-title">Weather Forecast</h4>
+                            <p class="card-text">Accurate 7-day weather predictions tailored to your region. Plan your farming activities with confidence.</p>
+                            <a href="#weather" class="btn btn-outline-success">Check Weather</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card feature-card">
+                        <div class="card-body text-center p-4">
+                            <div class="feature-icon mb-3 text-info">
+                                <i class="fas fa-lightbulb fa-3x"></i>
+                            </div>
+                            <h4 class="card-title">Farming Tips</h4>
+                            <p class="card-text">Expert advice on crop rotation, pest control, irrigation, and modern farming techniques for better yields.</p>
+                            <a href="#tips" class="btn btn-outline-success">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <label for="password">Your Password</label>
-      <input type="password" id="password" name="password" required>
+    <!-- Market Prices Section -->
+    <section class="py-5" id="prices">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6">
+                    <h2 class="fw-bold mb-3">Today's Market Prices</h2>
+                    <p class="lead text-muted">Updated every hour from major markets across Ethiopia</p>
+                    <p>Know the exact value of your crops before you go to market. Our data comes directly from Ethiopia's largest agricultural markets.</p>
+                    <a href="#" class="btn btn-success">View All Prices</a>
+                </div>
+                <div class="col-md-6">
+                    <div class="table-responsive">
+                        <table class="table table-hover price-table">
+                            <thead>
+                                <tr>
+                                    <th>Crop</th>
+                                    <th>Price (ETB/kg)</th>
+                                    <th>Change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><i class="fas fa-seedling text-success me-2"></i>Teff</td>
+                                    <td>450</td>
+                                    <td class="text-success">↑ 2%</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-seedling text-success me-2"></i>Maize</td>
+                                    <td>220</td>
+                                    <td class="text-danger">↓ 1.5%</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-coffee text-success me-2"></i>Coffee</td>
+                                    <td>680</td>
+                                    <td class="text-success">↑ 3.2%</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-wheat-alt text-success me-2"></i>Wheat</td>
+                                    <td>310</td>
+                                    <td class="text-success">↑ 0.8%</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fas fa-apple-alt text-success me-2"></i>Barley</td>
+                                    <td>280</td>
+                                    <td class="text-danger">↓ 2.1%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-end">
+                        <small class="text-muted">Last updated: <span id="update-time">Today, 10:30 AM</span></small>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card border-success">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marked-alt me-2"></i>Regional Price Differences</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Crop</th>
+                                            <th>Addis Ababa</th>
+                                            <th>Bahir Dar</th>
+                                            <th>Hawassa</th>
+                                            <th>Mekelle</th>
+                                            <th>Jimma</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Teff</td>
+                                            <td>450</td>
+                                            <td>430</td>
+                                            <td>440</td>
+                                            <td>460</td>
+                                            <td>420</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maize</td>
+                                            <td>220</td>
+                                            <td>210</td>
+                                            <td>230</td>
+                                            <td>215</td>
+                                            <td>225</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Coffee</td>
+                                            <td>680</td>
+                                            <td>650</td>
+                                            <td>700</td>
+                                            <td>660</td>
+                                            <td>720</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+    <!-- Weather Section -->
+    <section class="py-5 bg-light" id="weather">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Weather Forecast</h2>
+                <p class="lead text-muted">Plan your farming activities with accurate weather predictions</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card weather-card h-100">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marker-alt text-danger me-2"></i>Amhara Region</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-cloud-rain fa-3x text-primary me-3"></i>
+                                <div>
+                                    <h3 class="mb-0">22°C</h3>
+                                    <small class="text-muted">Moderate Rain</small>
+                                </div>
+                            </div>
+                            <p><i class="fas fa-calendar-day text-success me-2"></i><strong>July 20-25:</strong> Consistent rainfall expected - ideal planting conditions for teff and wheat.</p>
+                            <div class="weather-details mt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="mb-1"><i class="fas fa-tint me-2 text-info"></i>Humidity</p>
+                                        <p class="mb-1"><i class="fas fa-wind me-2 text-secondary"></i>Wind</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-1">78%</p>
+                                        <p class="mb-1">12 km/h</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card weather-card h-100">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marker-alt text-danger me-2"></i>Oromia Region</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-sun fa-3x text-warning me-3"></i>
+                                <div>
+                                    <h3 class="mb-0">28°C</h3>
+                                    <small class="text-muted">Sunny</small>
+                                </div>
+                            </div>
+                            <p><i class="fas fa-calendar-day text-success me-2"></i><strong>July 20-25:</strong> Dry and sunny - perfect for harvesting and drying crops.</p>
+                            <div class="weather-details mt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="mb-1"><i class="fas fa-tint me-2 text-info"></i>Humidity</p>
+                                        <p class="mb-1"><i class="fas fa-wind me-2 text-secondary"></i>Wind</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-1">45%</p>
+                                        <p class="mb-1">8 km/h</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card weather-card h-100">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marker-alt text-danger me-2"></i>SNNP Region</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-cloud-sun fa-3x text-info me-3"></i>
+                                <div>
+                                    <h3 class="mb-0">25°C</h3>
+                                    <small class="text-muted">Partly Cloudy</small>
+                                </div>
+                            </div>
+                            <p><i class="fas fa-calendar-day text-success me-2"></i><strong>July 20-25:</strong> Intermittent showers - good for coffee and maize crops.</p>
+                            <div class="weather-details mt-3">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="mb-1"><i class="fas fa-tint me-2 text-info"></i>Humidity</p>
+                                        <p class="mb-1"><i class="fas fa-wind me-2 text-secondary"></i>Wind</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-1">65%</p>
+                                        <p class="mb-1">10 km/h</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-success">View Detailed Forecast</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- Farming Tips Section -->
+    <section class="py-5" id="tips">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">This Week's Farming Tips</h2>
+                <p class="lead text-muted">Expert advice to improve your yields</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3" class="card-img-top" alt="Maize Storage">
+                        <div class="card-body">
+                            <h5 class="card-title">🌽 Maize Storage Solutions</h5>
+                            <p class="card-text">Learn proper maize storage techniques to prevent mold and pest infestation. Keep your harvest in dry, ventilated spaces with these simple methods.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 5 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3" class="card-img-top" alt="Drip Irrigation">
+                        <div class="card-body">
+                            <h5 class="card-title">💧 Low-Cost Drip Irrigation</h5>
+                            <p class="card-text">Set up an affordable drip irrigation system that saves up to 60% water compared to traditional methods. Step-by-step guide for small farms.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 8 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100">
+                        <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-4.0.3" class="card-img-top" alt="Beekeeping">
+                        <div class="card-body">
+                            <h5 class="card-title">🐝 Beekeeping for Profit</h5>
+                            <p class="card-text">Start beekeeping with minimal investment and sell honey at premium prices. Essential equipment, hive management, and marketing strategies.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="fas fa-clock me-1"></i> 10 min read</small>
+                                <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-success">View All Farming Tips</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="py-5 bg-success text-white" id="register">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-3">Join Our Farming Community</h2>
+                    <p class="lead">Get access to all features for free:</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Daily market price alerts</li>
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Personalized weather forecasts</li>
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Expert farming advice</li>
+                        <li class="mb-2"><i class="fas fa-check-circle me-2"></i> Connect with other farmers</li>
+                    </ul>
+                    <div class="mt-4">
+                        <h5><i class="fas fa-mobile-alt me-2"></i>Mobile App Coming Soon!</h5>
+                        <p>Get notifications even without internet (USSD service available)</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card bg-white text-dark">
+                        <div class="card-body p-4">
+                            <h4 class="card-title text-center mb-4">Create Free Account</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="e.g., Alemayehu Kebede">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="e.g., 0912345678">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="region" class="form-label">Region</label>
+                                    <select class="form-select" id="region">
+                                        <option selected>Select your region</option>
+                                        <option>Addis Ababa</option>
+                                        <option>Amhara</option>
+                                        <option>Oromia</option>
+                                        <option>SNNP</option>
+                                        <option>Tigray</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="crops" class="form-label">Main Crops (Select all that apply)</label>
+                                    <select class="form-select" multiple id="crops">
+                                        <option>Teff</option>
+                                        <option>Maize</option>
+                                        <option>Coffee</option>
+                                        <option>Wheat</option>
+                                        <option>Barley</option>
+                                        <option>Vegetables</option>
+                                        <option>Fruits</option>
+                                        <option>Livestock</option>
+                                    </select>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success btn-lg">Register Now</button>
+                                </div>
+                                <p class="text-center mt-3 mb-0">
+                                    <small>Already have an account? <a href="#" class="text-success">Log in</a></small>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">What Farmers Say</h2>
+                <p class="lead text-muted">Success stories from our community</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"Thanks to EthioFarmers Hub, I sold my teff at 20% higher price by waiting for the right market day. The weather alerts saved my maize from unexpected rain!"</p>
+                            <div class="d-flex align-items-center mt-auto">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="50" alt="User">
+                                <div>
+                                    <h6 class="mb-0">Ato Girma</h6>
+                                    <small class="text-muted">Teff Farmer, Amhara</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="card-text">"The drip irrigation guide helped me reduce water usage by half while increasing my vegetable yield. Now I'm teaching others in my village!"</p>
+                            <div class="d-flex align-items-center mt-auto">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="50" alt="User">
+                                <div>
+                                    <h6 class="mb-0">W/ro Selam</h6>
+                                    <small class="text-muted">Vegetable Farmer, Oromia</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <div class="mb-3 text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="card-text">"I started beekeeping after reading tips on this platform. Now I earn extra 15,000 ETB/month from honey sales. The community support is amazing!"</p>
+                            <div class="d-flex align-items-center mt-auto">
+                                <img src="https://randomuser.me/api/portraits/men/75.jpg" class="rounded-circle me-3" width="50" alt="User">
+                                <div>
+                                    <h6 class="mb-0">Ato Tesfaye</h6>
+                                    <small class="text-muted">Beekeeper, SNNP</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Our Partners</h2>
+                <p class="lead text-muted">Working together to empower Ethiopian farmers</p>
+            </div>
+            
+            <div class="row align-items-center justify-content-center g-4">
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="https://via.placeholder.com/150x80?text=MoA" alt="Ministry of Agriculture" class="img-fluid">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="https://via.placeholder.com/150x80?text=FAO" alt="FAO Ethiopia" class="img-fluid">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="https://via.placeholder.com/150x80?text=AgriTech" alt="AgriTech Ethiopia" class="img-fluid">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="https://via.placeholder.com/150x80?text=ECX" alt="ECX" class="img-fluid">
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <img src="https://via.placeholder.com/150x80?text=ACDI" alt="ACDI/VOCA" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-5 bg-light" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-4">Contact Us</h2>
+                    <p>Have questions or suggestions? We'd love to hear from you!</p>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-envelope text-success me-2"></i>Email</h5>
+                        <p>info@ethiofarmershub.com</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-phone-alt text-success me-2"></i>Phone</h5>
+                        <p>+251 9X XXX XXXX (Office)<br>
+                        Toll-free: 8000 (for rural farmers)</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-map-marker-alt text-success me-2"></i>Office</h5>
+                        <p>Kirkos Subcity, Woreda 08<br>
+                        Addis Ababa, Ethiopia</p>
+                    </div>
+                    
+                    <div>
+                        <h5><i class="fas fa-clock text-success me-2"></i>Working Hours</h5>
+                        <p>Monday - Friday: 8:30 AM - 5:30 PM<br>
+                        Saturday: 9:00 AM - 1:00 PM</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <h4 class="card-title mb-4">Send Us a Message</h4>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="contact-name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="contact-name" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="contact-email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="contact-email">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact-phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="contact-phone" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact-subject" class="form-label">Subject</label>
+                                    <select class="form-select" id="contact-subject">
+                                        <option selected>Select a topic</option>
+                                        <option>Market Prices</option>
+                                        <option>Weather Information</option>
+                                        <option>Farming Advice</option>
+                                        <option>Technical Support</option>
+                                        <option>Partnership</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="contact-message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="contact-message" rows="4" required></textarea>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <h5 class="text-white mb-4"><i class="fas fa-leaf me-2"></i>EthioFarmers Hub</h5>
+                    <p>Empowering Ethiopian farmers with technology, information, and community support to transform agriculture.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#prices" class="text-white-50">Market Prices</a></li>
+                        <li class="mb-2"><a href="#weather" class="text-white-50">Weather</a></li>
+                        <li class="mb-2"><a href="#tips" class="text-white-50">Farming Tips</a></li>
+                        <li class="mb-2"><a href="#register" class="text-white-50">Register</a></li>
+                        <li class="mb-2"><a href="#contact" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Farming Guides</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Video Tutorials</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Market Analysis</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Seasonal Calendar</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white-50">Subscribe for weekly farming tips and market updates</p>
+                    <form class="mb-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                            <button class="btn btn-success" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                    <select class="language-selector">
+                        <option>English</option>
+                        <option>Amharic</option>
+                        <option>Oromiffa</option>
+                        <option>Tigrinya</option>
+                    </select>
+                </div>
+            </div>
+            
+            <hr class="mt-4 mb-4 bg-secondary">
+            
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2023 EthioFarmers Hub. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-white-50 me-3">Privacy Policy</a>
+                    <a href="#" class="text-white-50">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="btn btn-success btn-lg rounded-circle back-to-top" style="position: fixed; bottom: 20px; right: 20px; display: none;">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            var backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('update-time').textContent = now.toLocaleTimeString('en-US', options);
+        }
+        
+        // Update every minute
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
